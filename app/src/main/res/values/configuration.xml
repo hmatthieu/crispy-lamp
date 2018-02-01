@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="host_1">sandblock.app.link</string>
+    <string name="host_2">sandblock-alternate.app.link</string>
+    <string name="host_3">sandblock.test-app.link</string>
+    <string name="host_4">sandblock-alternate.test-app.link</string>
+</resources>
