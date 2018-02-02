@@ -70,7 +70,21 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
     @Override
     public void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
         this.setIntent(intent);
+
+        if (intent.getExtras().getBoolean("branch_force_new_session") == true)
+        {
+            JSONObject referringParams = Branch.getInstance().getFirstReferringParams();
+            try
+            {
+                setOuput(referringParams.toString(2));
+            }
+            catch (JSONException e)
+            {
+                setError(e.toString());
+            }
+        }
     }
 
     private boolean handleText(String text){
@@ -79,9 +93,11 @@ public class MainActivity extends Activity implements View.OnClickListener {
             return false;
         }
 
-        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(text));
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.putExtra("branch", text);
+        intent.putExtra("branch_force_new_session",true);
         startActivity(intent);
+
         return true;
     }
 
